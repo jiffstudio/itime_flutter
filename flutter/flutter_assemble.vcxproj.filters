@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\Python\iTIme\itime_frontend\CMakeFiles\934e6ff3c91360ed3d777ab8cbcc3842\flutter_windows.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\Python\iTIme\itime_frontend\CMakeFiles\8c35c3cd6f518b91b3f3fa316100c65a\flutter_assemble.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Projects\Python\iTIme\itime_frontend\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Projects\Python\iTIme\itime_frontend\flutter\CMakeFiles\flutter_assemble" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{8A515DDA-C823-3767-8852-A9A7E1A1A914}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
