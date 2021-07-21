@@ -1,11 +1,16 @@
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:itime_frontend/generated/l10n.dart';
+import 'package:itime_frontend/res.dart';
+import 'package:itime_frontend/styles/itime_colors.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:quiver/iterables.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import '../blocs/canteen/canteen_bloc.dart';
 import '../blocs/settings/settings_bloc.dart';
@@ -23,14 +28,16 @@ import 'widgets/list_header.dart';
 import 'widgets/rounded_container.dart';
 import 'widgets/timetable.dart';
 
-class DashboardPage extends StatefulWidget {
+class TimetablePage extends StatefulWidget {
   @override
-  _DashboardPageState createState() => _DashboardPageState();
+  _TimetablePageState createState() => _TimetablePageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _TimetablePageState extends State<TimetablePage>
+    with SingleTickerProviderStateMixin {
   // PageView
   late PageController _pageController;
+  late TabController _tabController;
   int? _lastPage;
 
   // 日期选择器
@@ -38,6 +45,10 @@ class _DashboardPageState extends State<DashboardPage> {
   late DateTime _today;
   late DateTime _selectedDate;
   late DateTime _visibleWeekStart;
+
+  late Iterable<num> _weekNumbers;
+
+  int _selectedWeekIndex = 0;
 
   @override
   void initState() {
@@ -53,12 +64,14 @@ class _DashboardPageState extends State<DashboardPage> {
     _today = now;
     _selectedDate = now;
     _visibleWeekStart = now.weekStart();
+    _weekNumbers = range(1, 11);
+
+    _tabController = TabController(vsync: this, length: _weekNumbers.length);
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return BlocBuilder<SettingsBloc, Settings>(
       builder: (context, settings) {
         if (!settings.initialized) {
@@ -89,10 +102,9 @@ class _DashboardPageState extends State<DashboardPage> {
                       S.of(context).settings_semester_not_configured,
                     ),
                     SizedBox(height: 16),
-                    RaisedButton(
+                    ElevatedButton(
                       child: Text(
-                        S.of(context)
-                            .settings_semester_not_configured_button,
+                        S.of(context).settings_semester_not_configured_button,
                       ),
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -106,9 +118,9 @@ class _DashboardPageState extends State<DashboardPage> {
                       S.of(context).settings_course_not_configured,
                     ),
                     SizedBox(height: 16),
-                    RaisedButton(
-                      child: Text(S.of(context)
-                          .settings_course_not_configured_button),
+                    ElevatedButton(
+                      child: Text(
+                          S.of(context).settings_course_not_configured_button),
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => CourseOfStudiesSettings(),
@@ -125,7 +137,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     SizedBox(height: 16),
                     ElevatedButton(
-                      child: Text(S.of(context)
+                      child: Text(S
+                          .of(context)
                           .settings_lectures_not_configured_button),
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -146,7 +159,48 @@ class _DashboardPageState extends State<DashboardPage> {
           _pageController = PageController(initialPage: _lastPage!);
         }
 
-        return NestedScrollView(
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: theme.primaryColorLight,
+            toolbarHeight: 100,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                    child: Row(
+                  children: [
+                    Text('大三上学期', textAlign: TextAlign.left),
+                    SizedBox(width: 10),
+                    Image.asset(
+                      R.arrow_drop_down,
+                      color: ItimeColors.black,
+                    ),
+                  ],
+                )),
+              ],
+            ),
+            actions: [
+              Image.asset(R.search, width: 48),
+              Image.asset(R.scan, width: 48),
+              Image.asset(R.calendar, width: 48),
+              SizedBox(
+                width: 8,
+              ),
+
+            ],
+            bottom: _buildTabBar(),
+          ),
+          body: TabBarView(
+              controller: _tabController,
+              children: _weekNumbers
+                  .map((i) => Text(i.toString()))
+                  .toList(),
+          ),
+        );
+        NestedScrollView(
           headerSliverBuilder: (_, b) {
             return [
               SliverAppBar(
@@ -160,18 +214,19 @@ class _DashboardPageState extends State<DashboardPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Expanded(
-                        child: Text('TH Rosenheim', textAlign: TextAlign.left),
+                        child: Text('大三上学期', textAlign: TextAlign.left),
                       ),
                       TextButton(
                         onPressed: () {
-                          _pageController.jumpToPage(settings.semester!.startDate
+                          _pageController.jumpToPage(settings
+                              .semester!.startDate
                               .differenceInDaysWithoutWeekends(_today));
                           setState(() => _selectedDate = _today);
                         },
                         child: Row(
                           children: <Widget>[
                             AutoSizeText(
-                              DateFormat('EE  dd. MMM', 'de_DE')
+                              DateFormat('EE  M/dd', 'zh_CN')
                                   .format(_today)
                                   .replaceAll(r'(\d+)', r'$1\.'),
                               style: theme.primaryTextTheme.bodyText1!
@@ -340,5 +395,53 @@ class _DashboardPageState extends State<DashboardPage> {
       _lastPage = newPage;
       _selectedDate = date;
     });
+  }
+
+  Widget _buildWeekTab(String title, {bool selected = false}) {
+    return SizedBox(
+        height: 36,
+        child: Tab(
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                child: Text(
+                  title,
+                  style: textTheme.bodyText1!
+                      .copyWith(color: selected ? ItimeColors.white : null),
+                ))));
+  }
+
+  PreferredSizeWidget _buildTabBar() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(36),
+      child: Material(
+        color: ItimeColors.card,
+        child: TabBar(
+          onTap: (int i) {
+            setState(() {
+              _selectedWeekIndex = i;
+            });
+          },
+          physics: const BouncingScrollPhysics(),
+          labelPadding: EdgeInsets.all(0),
+          controller: _tabController,
+          unselectedLabelColor: ItimeColors.normal,
+          indicatorColor: Colors.green,
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorWeight: double.minPositive,
+          indicator: RectangularIndicator(
+            topLeftRadius: 12,
+            topRightRadius: 12,
+            bottomLeftRadius: 12,
+            bottomRightRadius: 12,
+            color: ItimeColors.vi,
+          ),
+          isScrollable: true,
+          tabs: _weekNumbers
+              .map((i) => _buildWeekTab("第$i周",
+              selected: i - 1 == _selectedWeekIndex))
+              .toList(),
+        ),
+      ),
+    );
   }
 }

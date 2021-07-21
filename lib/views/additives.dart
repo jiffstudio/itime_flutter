@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:itime_frontend/generated/l10n.dart';
-
+import 'package:itime_frontend/generated/l10n.g.dart';
 import '../model/canteen.dart';
 import '../utils/string_utils.dart';
 

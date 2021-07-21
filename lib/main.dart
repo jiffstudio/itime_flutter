@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:time_machine/time_machine.dart';
 
 import 'blocs/bloc_observer.dart';
 import 'blocs/canteen/canteen_bloc.dart';
 import 'blocs/settings/settings_bloc.dart';
 import 'blocs/timetable/timetable_bloc.dart';
 import 'generated/l10n.dart';
+import 'generated/l10n.g.dart';
 import 'theme.dart';
 import 'views/home.dart';
 
@@ -26,6 +28,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  await TimeMachine.initialize({'rootBundle': rootBundle});
   runApp(ItimeApp());
 }
 
@@ -60,11 +63,12 @@ class _ItimeAppState extends State<ItimeApp> {
             debugShowCheckedModeBanner: false,
             localizationsDelegates: [
               //Intl生成的本地化代理
-              S.getLocaleDelegate(Locale(settings.locale ?? 'zh', '')),
+              GenerateLocaleDelegate.getLocaleDelegate(Locale(settings.locale ?? 'zh', '')),
               // 指定本地化的字符串和一些其他的值
               GlobalMaterialLocalizations.delegate,
               // 指定默认的文本排列方向, 由左到右或由右到左
               GlobalWidgetsLocalizations.delegate,
+
             ],
             supportedLocales: ItimeApp.supportedLanguageCodes
                 .map((languageCode) => Locale(languageCode, ''))

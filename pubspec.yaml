@@ -1,5 +1,5 @@
 name: itime_frontend
-description: 时刻，让时间管理变得简单！
+description: 时刻，让时间管理变得�??单！
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -32,7 +32,7 @@ dependencies:
   flutter_bloc: any
   bubble_bottom_bar: any
   material_design_icons_flutter: any
-  # 用途未知
+
   auto_size_text: any
   photo_view: any
   logger: any
@@ -44,6 +44,12 @@ dependencies:
   html: any
   dio_http_cache: any
   equatable: any
+  bubble_tab_indicator: any
+  tab_indicator_styler: any
+  quiver: any
+  time_machine: any
+  timetable: any
+
 
 dev_dependencies:
   flutter_test:
@@ -60,13 +66,36 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/additives/beef.png
+    - assets/additives/chicken.png
+    - assets/additives/Ei.png
+    - assets/additives/En.png
+    - assets/additives/Fi.png
+    - assets/additives/Gl.png
+    - assets/additives/Kn.png
+    - assets/additives/Kr.png
+    - assets/additives/Lu.png
+    - assets/additives/Mi.png
+    - assets/additives/pig.png
+    - assets/additives/Sc.png
+    - assets/additives/Se.png
+    - assets/additives/Sf.png
+    - assets/additives/Sl.png
+    - assets/additives/So.png
+    - assets/additives/Sw.png
+    - assets/additives/vegan.png
+    - assets/additives/vegetarian.png
+    - assets/additives/Wt.png
     - assets/lageplan.png
-    - assets/sleep.png
-    - assets/logo.png
     - assets/license.txt
-    - assets/additives/
-    - assets/locale/
-
+    - assets/logo.png
+    - assets/sleep.png
+    - images/arrow_drop_down.png
+    - images/calendar.png
+    - images/scan.png
+    - images/search.png
+    - packages/time_machine/data/cultures/cultures.bin
+    - packages/time_machine/data/tzdb/tzdb.bin
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -86,19 +115,19 @@ flutter:
   fonts:
     - family: RobotoMono
       fonts:
-        - asset: assets/fonts/RobotoMono-Regular.ttf
+        - asset: fonts/RobotoMono-Regular.ttf
           weight: 400
     - family: Rubik
       fonts:
-        - asset: assets/fonts/OPPOSans-L.ttf
+        - asset: fonts/OPPOSans-L.ttf
           weight: 300
-        - asset: assets/fonts/OPPOSans-R.ttf
+        - asset: fonts/OPPOSans-R.ttf
           weight: 400
-        - asset: assets/fonts/OPPOSans-M.ttf
+        - asset: fonts/OPPOSans-M.ttf
           weight: 500
-        - asset: assets/fonts/OPPOSans-B.ttf
+        - asset: fonts/OPPOSans-B.ttf
           weight: 600
-        - asset: assets/fonts/OPPOSans-H.ttf
+        - asset: fonts/OPPOSans-H.ttf
           weight: 700
   # fonts:
   #   - family: Schyler

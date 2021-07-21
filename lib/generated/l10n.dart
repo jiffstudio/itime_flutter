@@ -25,10 +25,6 @@ class S {
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
-  static AppLocalizationDelegate getLocaleDelegate(Locale locale){
-    return AppLocalizationDelegate(locale: locale);
-  }
-
   static Future<S> load(Locale locale) {
     final name = (locale.countryCode?.isEmpty ?? false)
         ? locale.languageCode
@@ -135,10 +131,390 @@ class S {
   }
 
   /// `Chicken egg`
-  String additive(String key) {
+  String get canteen_additive_ei {
     return Intl.message(
       'Chicken egg',
-      name: 'canteen_additive_$key',
+      name: 'canteen_additive_ei',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Peanut`
+  String get canteen_additive_en {
+    return Intl.message(
+      'Peanut',
+      name: 'canteen_additive_en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fish`
+  String get canteen_additive_fi {
+    return Intl.message(
+      'Fish',
+      name: 'canteen_additive_fi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wheat containing gluten`
+  String get canteen_additive_gl {
+    return Intl.message(
+      'Wheat containing gluten',
+      name: 'canteen_additive_gl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wheat`
+  String get canteen_additive_glw {
+    return Intl.message(
+      'Wheat',
+      name: 'canteen_additive_glw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rye`
+  String get canteen_additive_glr {
+    return Intl.message(
+      'Rye',
+      name: 'canteen_additive_glr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Barley`
+  String get canteen_additive_glg {
+    return Intl.message(
+      'Barley',
+      name: 'canteen_additive_glg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oats`
+  String get canteen_additive_glh {
+    return Intl.message(
+      'Oats',
+      name: 'canteen_additive_glh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spelt`
+  String get canteen_additive_gld {
+    return Intl.message(
+      'Spelt',
+      name: 'canteen_additive_gld',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Garlic`
+  String get canteen_additive_kn {
+    return Intl.message(
+      'Garlic',
+      name: 'canteen_additive_kn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crustaceans`
+  String get canteen_additive_kr {
+    return Intl.message(
+      'Crustaceans',
+      name: 'canteen_additive_kr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lupins`
+  String get canteen_additive_lu {
+    return Intl.message(
+      'Lupins',
+      name: 'canteen_additive_lu',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Milk and lactose`
+  String get canteen_additive_mi {
+    return Intl.message(
+      'Milk and lactose',
+      name: 'canteen_additive_mi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nuts`
+  String get canteen_additive_sc {
+    return Intl.message(
+      'Nuts',
+      name: 'canteen_additive_sc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Almonds`
+  String get canteen_additive_scm {
+    return Intl.message(
+      'Almonds',
+      name: 'canteen_additive_scm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hazelnuts`
+  String get canteen_additive_sch {
+    return Intl.message(
+      'Hazelnuts',
+      name: 'canteen_additive_sch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Walnuts`
+  String get canteen_additive_scw {
+    return Intl.message(
+      'Walnuts',
+      name: 'canteen_additive_scw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cashews`
+  String get canteen_additive_scc {
+    return Intl.message(
+      'Cashews',
+      name: 'canteen_additive_scc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pistachios`
+  String get canteen_additive_scp {
+    return Intl.message(
+      'Pistachios',
+      name: 'canteen_additive_scp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sesame seeds`
+  String get canteen_additive_se {
+    return Intl.message(
+      'Sesame seeds',
+      name: 'canteen_additive_se',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mustard`
+  String get canteen_additive_sf {
+    return Intl.message(
+      'Mustard',
+      name: 'canteen_additive_sf',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Celery`
+  String get canteen_additive_sl {
+    return Intl.message(
+      'Celery',
+      name: 'canteen_additive_sl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Soy`
+  String get canteen_additive_so {
+    return Intl.message(
+      'Soy',
+      name: 'canteen_additive_so',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sulfur dioxide and Sulfites`
+  String get canteen_additive_sw {
+    return Intl.message(
+      'Sulfur dioxide and Sulfites',
+      name: 'canteen_additive_sw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Molluscs`
+  String get canteen_additive_wt {
+    return Intl.message(
+      'Molluscs',
+      name: 'canteen_additive_wt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `with food coloring`
+  String get canteen_additive_1 {
+    return Intl.message(
+      'with food coloring',
+      name: 'canteen_additive_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `with preservatives`
+  String get canteen_additive_2 {
+    return Intl.message(
+      'with preservatives',
+      name: 'canteen_additive_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `with antioxidants`
+  String get canteen_additive_3 {
+    return Intl.message(
+      'with antioxidants',
+      name: 'canteen_additive_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `with flavor enhancers`
+  String get canteen_additive_4 {
+    return Intl.message(
+      'with flavor enhancers',
+      name: 'canteen_additive_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sulphured`
+  String get canteen_additive_5 {
+    return Intl.message(
+      'sulphured',
+      name: 'canteen_additive_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `blackened`
+  String get canteen_additive_6 {
+    return Intl.message(
+      'blackened',
+      name: 'canteen_additive_6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `waxed`
+  String get canteen_additive_7 {
+    return Intl.message(
+      'waxed',
+      name: 'canteen_additive_7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `with phosphates`
+  String get canteen_additive_8 {
+    return Intl.message(
+      'with phosphates',
+      name: 'canteen_additive_8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `with sweeteners`
+  String get canteen_additive_9 {
+    return Intl.message(
+      'with sweeteners',
+      name: 'canteen_additive_9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `contains a phenylalanine source`
+  String get canteen_additive_10 {
+    return Intl.message(
+      'contains a phenylalanine source',
+      name: 'canteen_additive_10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `with a type of sugar and/or sweetener`
+  String get canteen_additive_11 {
+    return Intl.message(
+      'with a type of sugar and/or sweetener',
+      name: 'canteen_additive_11',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `cocoa-based icing`
+  String get canteen_additive_13 {
+    return Intl.message(
+      'cocoa-based icing',
+      name: 'canteen_additive_13',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gelatin`
+  String get canteen_additive_14 {
+    return Intl.message(
+      'Gelatin',
+      name: 'canteen_additive_14',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alcohol`
+  String get canteen_additive_99 {
+    return Intl.message(
+      'Alcohol',
+      name: 'canteen_additive_99',
       desc: '',
       args: [],
     );
@@ -396,8 +772,7 @@ class S {
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
-  final Locale? locale;
-  const AppLocalizationDelegate({this.locale});
+  const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
     return const <Locale>[
@@ -409,9 +784,9 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
   @override
-  Future<S> load(Locale locale) => S.load(this.locale ?? locale);
+  Future<S> load(Locale locale) => S.load(locale);
   @override
-  bool shouldReload(AppLocalizationDelegate old) => true;
+  bool shouldReload(AppLocalizationDelegate old) => false;
 
   bool _isSupported(Locale locale) {
     for (var supportedLocale in supportedLocales) {

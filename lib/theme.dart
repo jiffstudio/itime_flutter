@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:itime_frontend/styles/itime_colors.dart';
 
+import 'utils/no_splash_factory.dart';
+
 //TODO: 修改命名
 const kAppBarShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.only(
@@ -32,19 +34,19 @@ const kTextLighter = Color(0xFFFBFBFB);
 
 TextTheme get textTheme{
   return const TextTheme(
-    headline1 : TextStyle(debugLabel: 'iTime headline1', fontFamily: 'OPPOSans'),
-    headline2 : TextStyle(debugLabel: 'iTime headline2', fontFamily: 'OPPOSans'),
-    headline3 : TextStyle(debugLabel: 'iTime headline3', fontFamily: 'OPPOSans'),
-    headline4 : TextStyle(debugLabel: 'iTime headline4', fontFamily: 'OPPOSans'),
-    headline5 : TextStyle(debugLabel: 'iTime headline5', fontFamily: 'OPPOSans', fontWeight: FontWeight.w700),
-    headline6 : TextStyle(debugLabel: 'iTime headline6', fontFamily: 'OPPOSans'),
-    subtitle1 : TextStyle(debugLabel: 'iTime subtitle1', fontFamily: 'OPPOSans'),
-    bodyText1 : TextStyle(debugLabel: 'iTime bodyText1', fontFamily: 'OPPOSans'),
-    bodyText2 : TextStyle(debugLabel: 'iTime bodyText2', fontFamily: 'OPPOSans'),
-    caption   : TextStyle(debugLabel: 'iTime caption',   fontFamily: 'OPPOSans'),
-    button    : TextStyle(debugLabel: 'iTime button',    fontFamily: 'OPPOSans'),
-    subtitle2 : TextStyle(debugLabel: 'iTime subtitle2', fontFamily: 'OPPOSans'),
-    overline  : TextStyle(debugLabel: 'iTime overline',  fontFamily: 'OPPOSans'),
+    headline1 : TextStyle(fontFamily: 'OPPOSans'),
+    headline2 : TextStyle(fontFamily: 'OPPOSans'),
+    headline3 : TextStyle(fontFamily: 'OPPOSans'),
+    headline4 : TextStyle(fontFamily: 'OPPOSans'),
+    headline5 : TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+    headline6 : TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+    subtitle1 : TextStyle(fontFamily: 'OPPOSans'),
+    bodyText1 : TextStyle(fontSize: 16, fontFamily: 'OPPOSans'),
+    bodyText2 : TextStyle(fontFamily: 'OPPOSans'),
+    caption   : TextStyle(fontFamily: 'OPPOSans', fontWeight: FontWeight.w700),
+    button    : TextStyle(fontFamily: 'OPPOSans'),
+    subtitle2 : TextStyle(fontFamily: 'OPPOSans'),
+    overline  : TextStyle(fontFamily: 'OPPOSans'),
   );
 }
 
@@ -52,8 +54,10 @@ TextTheme get textTheme{
 ThemeData get theme {
   final base = ThemeData(
       brightness: Brightness.light,
-      textTheme: textTheme);
+      textTheme: textTheme,);
   return base.copyWith(
+
+    splashFactory: NoSplashFactory(),
     primaryColor: ItimeColors.normal,
     primaryColorLight: ItimeColors.white,
     accentColor: kOrange,
@@ -61,6 +65,7 @@ ThemeData get theme {
       brightness: Brightness.light,
       color: ItimeColors.white,
       elevation: 0,
+      textTheme: _buildTextTheme(base.textTheme.copyWith(headline6: textTheme.headline5), kTextDark, kTextDarker),
     ),
     buttonColor: kOrange,
     buttonTheme: base.buttonTheme.copyWith(
@@ -74,7 +79,7 @@ ThemeData get theme {
         borderRadius: BorderRadius.circular(8),
       ),
     ),
-    scaffoldBackgroundColor: kBackgroundLight,
+    scaffoldBackgroundColor: ItimeColors.white,
     primaryIconTheme: base.iconTheme.copyWith(
       color: kIconDark,
     ),
@@ -144,26 +149,26 @@ ThemeData get darkTheme {
 
 TextTheme _buildTextTheme(TextTheme base, Color displayColor, Color bodyColor) {
   return base
-      .copyWith(
-        headline5: base.headline5!.copyWith(
-          fontWeight: FontWeight.w700,
-          letterSpacing: 0.5,
-          fontSize: 20,
-        ),
-        headline6: base.headline6!.copyWith(
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.5,
-          fontSize: 20,
-        ),
-        bodyText1: base.bodyText1!.copyWith(
-          fontWeight: FontWeight.w500,
-          fontSize: 16.0,
-        ),
-        subtitle1: base.bodyText1!.copyWith(
-          fontWeight: FontWeight.w500,
-          fontSize: 16.0,
-        ),
-      )
+      // .copyWith(
+      //   headline5: base.headline5!.copyWith(
+      //     fontWeight: FontWeight.w700,
+      //     letterSpacing: 0.5,
+      //     fontSize: 20,
+      //   ),
+      //   headline6: base.headline6!.copyWith(
+      //     fontWeight: FontWeight.w700,
+      //     letterSpacing: 0.5,
+      //     fontSize: 20,
+      //   ),
+      //   bodyText1: base.bodyText1!.copyWith(
+      //     fontWeight: FontWeight.w500,
+      //     fontSize: 16.0,
+      //   ),
+      //   subtitle1: base.bodyText1!.copyWith(
+      //     fontWeight: FontWeight.w500,
+      //     fontSize: 16.0,
+      //   ),
+      // )
       .apply(
         fontFamily: 'OPPOSans',
         displayColor: displayColor,
