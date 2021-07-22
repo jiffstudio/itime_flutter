@@ -28,11 +28,11 @@ class UserApi extends BaseApi {
     required String studentId,
     required String pwd,
   }) async {
-
     final url = '/login?studentId=$studentId&pwd=$pwd';
     try {
       final response = await dio.post(url);
       final json = await parseJsonInBackground(utf8.decode(response.data));
+      print(json);
       return LoginResultResponse.fromJson(json);
     } on Exception catch (_) {
       logger.e('Error getting LoginResultResponse from EatApi.\n$url');

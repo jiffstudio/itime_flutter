@@ -17,7 +17,7 @@ class LoginResultResponse {
   factory LoginResultResponse.fromJson(Map<String,dynamic> json) => LoginResultResponse(
     code: json['code'] as int,
     msg: json['msg'] as String,
-    data: json['data'] as LoginResult
+    data: LoginResult.fromJson(json['data'])
   );
   
   Map<String, dynamic> toJson() => {

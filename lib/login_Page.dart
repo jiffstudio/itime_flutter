@@ -160,6 +160,10 @@ class _LoginButonState extends State<LoginButon> {
               LoginResultResponse? response = await UserApi().login(
                   studentId: userContaller.text, pwd: passwordContaller.text);
               print(response!.code);
+              print(response.code);
+              print(response.code);
+              print(response.code);
+              print(response.toJson());
             }));
   }
 }

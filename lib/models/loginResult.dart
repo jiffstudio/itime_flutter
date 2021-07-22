@@ -27,10 +27,10 @@ class LoginResult {
     connectSuccess: json['connectSuccess'] as bool,
     pwdRight: json['pwdRight'] as bool,
     id: json['id'] as String,
-    userInfo: json['userInfo'] as UserInfo,
+    userInfo: UserInfo.fromJson(json['userInfo']),
     accessToken: json['accessToken'] as String,
     refreshToken: json['refreshToken'] as String,
-    arr: (json['arr'] as List? ?? []).map((e) => e as TableResult).toList()
+    arr: (json['arr'] as List? ?? []).map((e) => TableResult.fromJson(e)).toList()
   );
   
   Map<String, dynamic> toJson() => {
