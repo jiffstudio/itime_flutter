@@ -50,6 +50,7 @@ dependencies:
   time_machine: any
   timetable:
     path: ./plugins/timetable
+  json_model: any
 
 
 dev_dependencies:
