@@ -25,10 +25,10 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    return Scaffold(
-      body: TimetablePage(),
-    );
+    return TimetablePage();
+    // return Scaffold(
+    //   body: TimetablePage(),
+    // );
   }
 
 }

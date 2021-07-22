@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:itime_frontend/generated/l10n.dart';
@@ -161,7 +162,7 @@ class _TimetablePageState extends State<TimetablePage>
 
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: theme.primaryColorLight,
+            // backgroundColor: theme.primaryColorLight,
             toolbarHeight: 100,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -193,12 +194,7 @@ class _TimetablePageState extends State<TimetablePage>
             ],
             bottom: _buildTabBar(),
           ),
-          body: TabBarView(
-              controller: _tabController,
-              children: _weekNumbers
-                  .map((i) => Text(i.toString()))
-                  .toList(),
-          ),
+          body: TimetableExample(),
         );
         NestedScrollView(
           headerSliverBuilder: (_, b) {

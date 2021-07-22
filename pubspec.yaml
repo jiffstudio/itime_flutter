@@ -48,13 +48,13 @@ dependencies:
   tab_indicator_styler: any
   quiver: any
   time_machine: any
-  timetable: any
+  timetable:
+    path: ./plugins/timetable
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

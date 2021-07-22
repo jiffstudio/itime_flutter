@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:itime_frontend/styles/itime_colors.dart';
 
 import 'utils/no_splash_factory.dart';
@@ -32,40 +34,55 @@ const kTextDarker = Color(0xFF17262A);
 const kTextLight = Color(0xFFEEEEEE);
 const kTextLighter = Color(0xFFFBFBFB);
 
-TextTheme get textTheme{
+TextTheme get textTheme {
   return const TextTheme(
-    headline1 : TextStyle(fontFamily: 'OPPOSans'),
-    headline2 : TextStyle(fontFamily: 'OPPOSans'),
-    headline3 : TextStyle(fontFamily: 'OPPOSans'),
-    headline4 : TextStyle(fontFamily: 'OPPOSans'),
-    headline5 : TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-    headline6 : TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-    subtitle1 : TextStyle(fontFamily: 'OPPOSans'),
-    bodyText1 : TextStyle(fontSize: 16, fontFamily: 'OPPOSans'),
-    bodyText2 : TextStyle(fontFamily: 'OPPOSans'),
-    caption   : TextStyle(fontFamily: 'OPPOSans', fontWeight: FontWeight.w700),
-    button    : TextStyle(fontFamily: 'OPPOSans'),
-    subtitle2 : TextStyle(fontFamily: 'OPPOSans'),
-    overline  : TextStyle(fontFamily: 'OPPOSans'),
+    headline1: TextStyle(),
+    headline2: TextStyle(),
+    headline3: TextStyle(),
+    headline4: TextStyle(),
+    headline5: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+    headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+
+    bodyText1: TextStyle(fontSize: 16),
+    bodyText2: TextStyle(fontSize: 14),
+    subtitle1: TextStyle(fontSize: 12),
+    caption: TextStyle(fontWeight: FontWeight.w700),
+    button: TextStyle(),
+    subtitle2: TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
+    overline: TextStyle(),
+  ).apply(
+    fontFamily: 'OPPOSans',
+    bodyColor: ItimeColors.normal,
+    displayColor: ItimeColors.normal,
   );
 }
 
 
+
 ThemeData get theme {
   final base = ThemeData(
-      brightness: Brightness.light,
-      textTheme: textTheme,);
+    brightness: Brightness.light,
+    textTheme: textTheme,
+  );
   return base.copyWith(
-
     splashFactory: NoSplashFactory(),
     primaryColor: ItimeColors.normal,
     primaryColorLight: ItimeColors.white,
     accentColor: kOrange,
     appBarTheme: base.appBarTheme.copyWith(
+      backwardsCompatibility: false,
       brightness: Brightness.light,
       color: ItimeColors.white,
       elevation: 0,
-      textTheme: _buildTextTheme(base.textTheme.copyWith(headline6: textTheme.headline5), kTextDark, kTextDarker),
+      textTheme: _buildTextTheme(
+          base.textTheme.copyWith(headline6: textTheme.headline5),
+          kTextDark,
+          kTextDarker),
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: ItimeColors.white,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      foregroundColor: ItimeColors.normal,
     ),
     buttonColor: kOrange,
     buttonTheme: base.buttonTheme.copyWith(
@@ -170,8 +187,8 @@ TextTheme _buildTextTheme(TextTheme base, Color displayColor, Color bodyColor) {
       //   ),
       // )
       .apply(
-        fontFamily: 'OPPOSans',
-        displayColor: displayColor,
-        bodyColor: bodyColor,
-      );
+    fontFamily: 'OPPOSans',
+    displayColor: displayColor,
+    bodyColor: bodyColor,
+  );
 }

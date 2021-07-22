@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:time_machine/time_machine.dart';
+import 'package:timetable/timetable.dart';
 
 import 'blocs/bloc_observer.dart';
 import 'blocs/canteen/canteen_bloc.dart';
@@ -31,6 +33,16 @@ void main() async {
   await TimeMachine.initialize({'rootBundle': rootBundle});
   runApp(ItimeApp());
 }
+
+final _supportedLocales = [
+  const Locale('de'),
+  const Locale('en'),
+  const Locale('es'),
+  const Locale('ja'),
+  const Locale('zh', 'CN'),
+  const Locale('zh', 'TW'),
+];
+
 
 class ItimeApp extends StatefulWidget {
   //支持本地化的语言编码列表
@@ -62,6 +74,7 @@ class _ItimeAppState extends State<ItimeApp> {
             title: '时刻',
             debugShowCheckedModeBanner: false,
             localizationsDelegates: [
+              TimetableLocalizationsDelegate(),
               //Intl生成的本地化代理
               GenerateLocaleDelegate.getLocaleDelegate(Locale(settings.locale ?? 'zh', '')),
               // 指定本地化的字符串和一些其他的值
