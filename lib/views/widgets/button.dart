@@ -24,6 +24,7 @@ class _PlusClassButtonState extends State<PlusClassButton> {
 }
 
 
+// ignore: must_be_immutable
 class ImageButton extends StatelessWidget {
   final VoidCallback? onTap;
   final Image? image;

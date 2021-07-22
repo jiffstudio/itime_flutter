@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:itime_frontend/data/user_api.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'models/loginResultResponse.dart';
 
@@ -155,15 +156,22 @@ class _LoginButonState extends State<LoginButon> {
             icon: Icon(Icons.arrow_forward,
                 color: Color.fromARGB(255, 222, 222, 248)),
             onPressed: () async {
-              print(userContaller.text);
-              print(passwordContaller.text);
-              LoginResultResponse? response = await UserApi().login(
-                  studentId: userContaller.text, pwd: passwordContaller.text);
-              print(response!.code);
-              print(response.code);
-              print(response.code);
-              print(response.code);
-              print(response.toJson());
+              try {
+                print(userContaller.text);
+                print(passwordContaller.text);
+                LoginResultResponse? response = await UserApi().login(
+                    studentId: userContaller.text, pwd: passwordContaller.text);
+              } catch (e) {
+                print('有错误');
+                Fluttertoast.showToast(
+                    msg: "账号或密码错误",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              }
             }));
   }
 }

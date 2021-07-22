@@ -35,8 +35,8 @@ class UserApi extends BaseApi {
       print(json);
       return LoginResultResponse.fromJson(json);
     } on Exception catch (_) {
-      logger.e('Error getting LoginResultResponse from EatApi.\n$url');
-      return null;
+      logger.e('Error getting LoginResultResponse from UserApi.\n$url');
+      throw Exception('Error getting LoginResultResponse from UserApi.\n$url');
     }
   }
 }
