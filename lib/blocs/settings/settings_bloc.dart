@@ -34,8 +34,8 @@ class SettingsBloc extends Bloc<Settings, Settings> {
     } else {
       // Defaults
       final settings = Settings(
-        locale: 'en',
-        themeMode: ThemeMode.dark,
+        locale: 'zh',
+        themeMode: ThemeMode.light,
       );
       return settings;
     }

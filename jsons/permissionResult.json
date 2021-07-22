@@ -1,0 +1,9 @@
+{
+    "userId": "123str456",
+    "userName": "黎明之子",
+    "tableId": "123456str",
+    "read": true,
+    "edit": true,
+    "insert": true,
+    "delete": true
+}

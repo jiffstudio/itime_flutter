@@ -1,0 +1,8 @@
+{
+    "tableName": "蹭课计划表",
+    "type": "个人蹭课计划表",
+    "tableId": "4d73055336a7dd8457250f68e75b4200",
+    "events": "$[]eventsResult",
+    "permission": "$[]permissionResult",
+    "ownerId": "ce4d9fbccf9481de95a8b4e89455b5cc"
+}

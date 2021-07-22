@@ -12,75 +12,80 @@ class ActivityPage extends StatefulWidget {
 class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(
+            height: 50,
+          ),
+          OneLineText(),
+          SizedBox(height: 15,),
+          SecondLineText(),
+        ],
+      ),
     );
   }
 }
 
-//第一个文本框
-class SelfLineText extends StatefulWidget {
-  SelfLineText({Key? key}) : super(key: key);
+class OneLineText extends StatefulWidget {
+  OneLineText({Key? key}) : super(key: key);
 
   @override
-  _SelfLineTextState createState() => _SelfLineTextState();
+  _OneLineTextState createState() => _OneLineTextState();
 }
 
-class _SelfLineTextState extends State<SelfLineText> {
+class _OneLineTextState extends State<OneLineText> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50,
-        child: Padding(
-            padding: EdgeInsets.all(7),
-            child: Row(
-              children: [
-                Text('名称',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Color.fromARGB(255, 252, 92, 123),
-                    )),
-                Expanded(child: TextField()),
-                Text(
-                  '必填',
+        height: 60,
+        child: TextField(
+          decoration: InputDecoration(
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16))),
+              prefix: Text('名称',
                   style: TextStyle(
-                      fontSize: 14, color: Color.fromARGB(255, 172, 173, 175)),
-                )
-              ],
-            )));
+                    fontSize: 14,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  )),
+              suffix: Text(
+                '必填',
+                style: TextStyle(
+                    fontSize: 14, color: Color.fromARGB(255, 252, 92, 123)),
+              )),
+        ));
   }
 }
 
-//第二个文本框
-class TwoLineText extends StatefulWidget {
-  TwoLineText({Key? key}) : super(key: key);
+class SecondLineText extends StatefulWidget {
+  SecondLineText({Key? key}) : super(key: key);
 
   @override
-  _SelfLineTextState createState() => _SelfLineTextState();
+  _SecondLineTextState createState() => _SecondLineTextState();
 }
 
 // ignore: unused_element
-class _TwoLineTextState extends State<SelfLineText> {
+class _SecondLineTextState extends State<SecondLineText> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50,
-        child: Padding(
-            padding: EdgeInsets.all(7),
-            child: Row(
-              children: [
-                Text('地点',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    )),
-                Expanded(child: TextField()),
-                Text(
-                  '非必填',
+        height: 60,
+        child: TextField(
+          decoration: InputDecoration(
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16))),
+              prefix: Text('地点',
                   style: TextStyle(
-                      fontSize: 14, color: Color.fromARGB(255, 172, 173, 175)),
-                )
-              ],
-            )));
+                    fontSize: 14,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  )),
+              suffix: Text(
+                '非必填',
+                style: TextStyle(
+                    fontSize: 14, color: Color.fromARGB(255, 172, 173, 175)),
+              )),
+        ));
   }
 }
+
+
