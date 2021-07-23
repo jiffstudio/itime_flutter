@@ -1,0 +1,13 @@
+{
+    "eventId": 2,
+    "name": "马原",
+    "location": "M楼-205",
+    "tableId": "4",
+    "colorId": 2,
+    "time":"$[]locationTimeResult",
+    "eventType": "COURSE_VO",
+    "compulsory": "必修",
+    "teacher": "锅小亮",
+    "courseCode": "CS33209",
+    "courseNo": "001"
+}

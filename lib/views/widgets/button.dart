@@ -24,12 +24,19 @@ class _PlusClassButtonState extends State<PlusClassButton> {
 }
 
 
+<<<<<<< HEAD
+=======
+// ignore: must_be_immutable
+>>>>>>> cf5774ef80ea0a13407cd8cc488d3f0b093c57cb
 class ImageButton extends StatelessWidget {
   final VoidCallback? onTap;
   final Image? image;
   Color? color;
   double? radius;
+<<<<<<< HEAD
   double? size;
+=======
+>>>>>>> cf5774ef80ea0a13407cd8cc488d3f0b093c57cb
   ImageButton.round({
     Key? key,
     this.onTap,
@@ -41,14 +48,22 @@ class ImageButton extends StatelessWidget {
     Key? key,
     this.onTap,
     this.image,
+<<<<<<< HEAD
     this.size,
+=======
+>>>>>>> cf5774ef80ea0a13407cd8cc488d3f0b093c57cb
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
+<<<<<<< HEAD
         width: size ?? 24,
         height: size ?? 24,
+=======
+        width: 24,
+        height: 24,
+>>>>>>> cf5774ef80ea0a13407cd8cc488d3f0b093c57cb
         decoration: radius != null ? BoxDecoration(
             color: color,
             borderRadius: BorderRadius.all(Radius.circular(150.0))) : null,

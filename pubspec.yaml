@@ -32,6 +32,7 @@ dependencies:
   flutter_bloc: any
   bubble_bottom_bar: any
   material_design_icons_flutter: any
+  fluttertoast: ^8.0.7
 
   auto_size_text: any
   photo_view: any
@@ -50,7 +51,12 @@ dependencies:
   time_machine: any
   timetable:
     path: ./plugins/timetable
+<<<<<<< HEAD
 #  json_model: any
+=======
+  json_to_model: any
+
+>>>>>>> cf5774ef80ea0a13407cd8cc488d3f0b093c57cb
 
 dev_dependencies:
   flutter_test:
@@ -104,6 +110,22 @@ flutter:
     - images/x.png
     - packages/time_machine/data/cultures/cultures.bin
     - packages/time_machine/data/tzdb/tzdb.bin
+
+    - images/splash.jpeg
+    - images/2.0x/splash.jpeg
+    - images/3.0x/splash.jpeg
+
+    - images/cover.png
+    - images/2.0x/cover.png
+    - images/3.0x/cover.png
+
+    - images/plus.png
+    - images/2.0x/plus.png
+    - images/3.0x/plus.png
+
+    - images/arrow_drop_right_down.png
+    - images/2.0x/arrow_drop_right_down.png
+    - images/3.0x/arrow_drop_right_down.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
