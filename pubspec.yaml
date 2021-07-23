@@ -32,7 +32,7 @@ dependencies:
   flutter_bloc: any
   bubble_bottom_bar: any
   material_design_icons_flutter: any
-  fluttertoast: ^8.0.7
+  fluttertoast: any
 
   auto_size_text: any
   photo_view: any
@@ -51,12 +51,7 @@ dependencies:
   time_machine: any
   timetable:
     path: ./plugins/timetable
-<<<<<<< HEAD
-#  json_model: any
-=======
   json_to_model: any
-
->>>>>>> cf5774ef80ea0a13407cd8cc488d3f0b093c57cb
 
 dev_dependencies:
   flutter_test:
