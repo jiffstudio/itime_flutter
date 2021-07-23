@@ -1,5 +1,5 @@
 name: itime_frontend
-description: 时刻，让时间管理变得�??单！
+description: ʱ�̣���ʱ�������??????����
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -50,7 +50,7 @@ dependencies:
   time_machine: any
   timetable:
     path: ./plugins/timetable
-
+#  json_model: any
 
 dev_dependencies:
   flutter_test:
@@ -92,8 +92,16 @@ flutter:
     - assets/sleep.png
     - images/arrow_drop_down.png
     - images/calendar.png
+    - images/check.png
+    - images/cross.png
+    - images/edit.png
+    - images/plus.png
+    - images/refresh.png
     - images/scan.png
     - images/search.png
+    - images/share.png
+    - images/trash.png
+    - images/x.png
     - packages/time_machine/data/cultures/cultures.bin
     - packages/time_machine/data/tzdb/tzdb.bin
   # To add assets to your application, add an assets section, like this:

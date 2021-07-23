@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:itime_frontend/styles/itime_colors.dart';
 import 'package:itime_frontend/theme.dart';
 import 'package:itime_frontend/views/widgets/positioning_demo.dart';
+import 'package:itime_frontend/views/widgets/text_field.dart';
 import 'package:quiver/iterables.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import 'package:timetable/timetable.dart';
@@ -82,7 +83,9 @@ import 'package:supercharged/supercharged.dart';
 class TimetableScaffold extends StatefulWidget {
   Widget? title;
   List<Widget>? actions;
+
   TimetableScaffold({this.title, this.actions});
+
   @override
   _TimetableScaffoldState createState() => _TimetableScaffoldState();
 }
@@ -132,7 +135,6 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
     _dateController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -237,6 +239,7 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
     //
     // return Material(color: colorScheme.surface, elevation: 4, child: child);
   }
+
   PreferredSizeWidget _buildTabBar() {
     return PreferredSize(
       preferredSize: Size.fromHeight(36),
@@ -253,24 +256,7 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
             setState(() {
               _selectedWeekIndex = i;
             });
-            showModalBottomSheet(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusDirectional.circular(24)), //加圆角
-                context: context,
-                builder: (context) {
-                  return Container(
-                      height: 600,  //定义高度
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
 
-                              Text("创建活动")
-                            ],
-                          )
-                        ],
-                      ));
-                });
           },
           physics: const BouncingScrollPhysics(),
           labelPadding: EdgeInsets.all(0),
@@ -288,13 +274,14 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
           ),
           isScrollable: true,
           tabs: _weekNumbers
-              .map((i) => _buildWeekTab("第$i周",
-              selected: i - 1 == _selectedWeekIndex))
+              .map((i) =>
+                  _buildWeekTab("第$i周", selected: i - 1 == _selectedWeekIndex))
               .toList(),
         ),
       ),
     );
   }
+
   Widget _buildWeekTab(String title, {bool selected = false}) {
     return SizedBox(
         height: 36,
@@ -307,6 +294,7 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
                       .copyWith(color: selected ? ItimeColors.white : null),
                 ))));
   }
+
   void _showSnackBar(String content) =>
       context.scaffoldMessenger.showSnackBar(SnackBar(content: Text(content)));
 
@@ -326,9 +314,9 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
       ),
       timeOverlayProvider: mergeTimeOverlayProviders([
         positioningDemoOverlayProvider,
-            (context, date) => _draggedEvents
+        (context, date) => _draggedEvents
             .map((it) =>
-            it.toTimeOverlay(date: date, widget: BasicEventWidget(it)))
+                it.toTimeOverlay(date: date, widget: BasicEventWidget(it)))
             .whereNotNull()
             .toList(),
       ]),
@@ -356,27 +344,27 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
           final today = DateTimeTimetable.today();
           final isToday = date == today;
           final baseTextStyle =
-          textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w500);
+              textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w500);
 
           return DateIndicatorStyle(context, date,
               decoration: BoxDecoration(),
               textStyle: isToday
                   ? baseTextStyle.copyWith(
-                color: ItimeColors.vi,
-              )
+                      color: ItimeColors.vi,
+                    )
                   : baseTextStyle);
         },
         weekdayIndicatorStyleProvider: (date) {
           final today = DateTimeTimetable.today();
           final isToday = date == today;
           final baseTextStyle =
-          textTheme.bodyText2!.copyWith(fontWeight: FontWeight.w500);
+              textTheme.bodyText2!.copyWith(fontWeight: FontWeight.w500);
           return WeekdayIndicatorStyle(context, date,
               textStyle: isToday
                   ? baseTextStyle.copyWith(
-                color: ItimeColors.vi,
-                fontWeight: FontWeight.w700,
-              )
+                      color: ItimeColors.vi,
+                      fontWeight: FontWeight.w700,
+                    )
                   : baseTextStyle);
         },
         dateHeaderStyleProvider: (date) {
@@ -388,7 +376,8 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
         },
         weekIndicatorStyleProvider: (week) {
           // TODO: 修改成正常的时间
-          return WeekIndicatorStyle(context, Week(week.weekBasedYear, week.weekOfYear - 20));
+          return WeekIndicatorStyle(
+              context, Week(week.weekBasedYear, week.weekOfYear - 20));
         },
         // startOfWeek: DateTime.monday,
         // dateDividersStyle: DateDividersStyle(
