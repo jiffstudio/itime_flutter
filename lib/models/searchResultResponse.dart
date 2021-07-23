@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'loginResult.dart';
+import 'searchResult.dart';
 
 @immutable
-class LoginResultResponse {
+class SearchResultResponse {
 
-  const LoginResultResponse({
+  const SearchResultResponse({
     required this.code,
     required this.msg,
     required this.data,
@@ -12,12 +12,12 @@ class LoginResultResponse {
 
   final int code;
   final String msg;
-  final LoginResult data;
+  final SearchResult data;
 
-  factory LoginResultResponse.fromJson(Map<String,dynamic> json) => LoginResultResponse(
+  factory SearchResultResponse.fromJson(Map<String,dynamic> json) => SearchResultResponse(
     code: json['code'] as int,
     msg: json['msg'] as String,
-    data: json['data'] as LoginResult
+    data: SearchResult.fromJson(json['data'])
   );
   
   Map<String, dynamic> toJson() => {
@@ -26,18 +26,18 @@ class LoginResultResponse {
     'data': data
   };
 
-  LoginResultResponse clone() => LoginResultResponse(
+  SearchResultResponse clone() => SearchResultResponse(
     code: code,
     msg: msg,
     data: data
   );
 
 
-  LoginResultResponse copyWith({
+  SearchResultResponse copyWith({
     int? code,
     String? msg,
-    LoginResult? data
-  }) => LoginResultResponse(
+    SearchResult? data
+  }) => SearchResultResponse(
     code: code ?? this.code,
     msg: msg ?? this.msg,
     data: data ?? this.data,
@@ -45,7 +45,7 @@ class LoginResultResponse {
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is LoginResultResponse && code == other.code && msg == other.msg && data == other.data;
+    || other is SearchResultResponse && code == other.code && msg == other.msg && data == other.data;
 
   @override
   int get hashCode => code.hashCode ^ msg.hashCode ^ data.hashCode;

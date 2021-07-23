@@ -31,7 +31,7 @@ class EventsResult {
     remarks: json['remarks'] as String,
     tableId: json['tableId'] as String,
     colorId: json['colorId'] as dynamic,
-    time: (json['time'] as List? ?? []).map((e) => TimeResult.fromJson(e)).toList(),
+    time: (json['time'] as List? ?? []).map((e) => e as TimeResult).toList(),
     eventType: json['eventType'] as dynamic
   );
   

@@ -25,8 +25,8 @@ class TableResult {
     tableName: json['tableName'] as String,
     type: json['type'] as String,
     tableId: json['tableId'] as String,
-    events: (json['events'] as List? ?? []).map((e) =>  EventsResult.fromJson(e)).toList(),
-    permission: (json['permission'] as List? ?? []).map((e) => PermissionResult.fromJson(e)).toList(),
+    events: (json['events'] as List? ?? []).map((e) => e as EventsResult).toList(),
+    permission: (json['permission'] as List? ?? []).map((e) => e as PermissionResult).toList(),
     ownerId: json['ownerId'] as String
   );
   
