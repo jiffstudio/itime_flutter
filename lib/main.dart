@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:itime_frontend/splash.dart';
+import 'package:itime_frontend/views/widgets/activity_create.dart';
 import 'package:time_machine/time_machine.dart';
 import 'package:timetable/timetable.dart';
 
@@ -89,7 +91,8 @@ class _ItimeAppState extends State<ItimeApp> {
             themeMode: settings.themeMode,
             theme: theme,
             darkTheme: darkTheme,
-            home: HomeScreen(),
+            // home: HomeScreen(),
+            home: SplashPage(),
           );
         },
       ),
