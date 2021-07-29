@@ -83,8 +83,8 @@ import 'package:supercharged/supercharged.dart';
 class TimetableScaffold extends StatefulWidget {
   Widget? title;
   List<Widget>? actions;
-
-  TimetableScaffold({this.title, this.actions});
+  List<BasicEvent> positioningEvents;
+  TimetableScaffold({this.title, this.actions, required this.positioningEvents});
 
   @override
   _TimetableScaffoldState createState() => _TimetableScaffoldState();
@@ -306,7 +306,7 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
       eventBuilder: (context, event) => _buildPartDayEvent(event),
       child: MultiDateTimetable<BasicEvent>(),
       // Optional:
-      eventProvider: eventProviderFromFixedList(positioningDemoEvents),
+      eventProvider: eventProviderFromFixedList(widget.positioningEvents),
       allDayEventBuilder: (context, event, info) => BasicAllDayEventWidget(
         event,
         info: info,

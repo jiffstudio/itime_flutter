@@ -48,130 +48,130 @@ import 'package:timetable/src/utils.dart';
 // });
 
 final positioningDemoEvents = <BasicEvent>[
-  _DemoEvent(0, 0, Duration(hours: 10), Duration(hours: 11)),
-  _DemoEvent(0, 1, Duration(hours: 11), Duration(hours: 12)),
-  _DemoEvent(0, 2, Duration(hours: 12), Duration(hours: 13)),
-  _DemoEvent(1, 0, Duration(hours: 10), Duration(hours: 12)),
-  _DemoEvent(1, 1, Duration(hours: 10), Duration(hours: 12)),
-  _DemoEvent(1, 2, Duration(hours: 14), Duration(hours: 16)),
-  _DemoEvent(1, 3, Duration(hours: 14, minutes: 15), Duration(hours: 16)),
-  _DemoEvent(2, 0, Duration(hours: 10), Duration(hours: 20)),
-  _DemoEvent(2, 1, Duration(hours: 10), Duration(hours: 12)),
-  _DemoEvent(2, 2, Duration(hours: 13), Duration(hours: 15)),
-  _DemoEvent(3, 0, Duration(hours: 10), Duration(hours: 20)),
-  _DemoEvent(3, 1, Duration(hours: 12), Duration(hours: 14)),
-  _DemoEvent(3, 2, Duration(hours: 12), Duration(hours: 15)),
-  _DemoEvent(4, 0, Duration(hours: 10), Duration(hours: 13)),
-  _DemoEvent(4, 1, Duration(hours: 10, minutes: 15), Duration(hours: 13)),
-  _DemoEvent(4, 2, Duration(hours: 10, minutes: 30), Duration(hours: 13)),
-  _DemoEvent(4, 3, Duration(hours: 10, minutes: 45), Duration(hours: 13)),
-  _DemoEvent(4, 4, Duration(hours: 11), Duration(hours: 13)),
-  _DemoEvent(
+  DemoEvent(0, 0, Duration(hours: 10), Duration(hours: 11)),
+  DemoEvent(0, 1, Duration(hours: 11), Duration(hours: 12)),
+  DemoEvent(0, 2, Duration(hours: 12), Duration(hours: 13)),
+  DemoEvent(1, 0, Duration(hours: 10), Duration(hours: 12)),
+  DemoEvent(1, 1, Duration(hours: 10), Duration(hours: 12)),
+  DemoEvent(1, 2, Duration(hours: 14), Duration(hours: 16)),
+  DemoEvent(1, 3, Duration(hours: 14, minutes: 15), Duration(hours: 16)),
+  DemoEvent(2, 0, Duration(hours: 10), Duration(hours: 20)),
+  DemoEvent(2, 1, Duration(hours: 10), Duration(hours: 12)),
+  DemoEvent(2, 2, Duration(hours: 13), Duration(hours: 15)),
+  DemoEvent(3, 0, Duration(hours: 10), Duration(hours: 20)),
+  DemoEvent(3, 1, Duration(hours: 12), Duration(hours: 14)),
+  DemoEvent(3, 2, Duration(hours: 12), Duration(hours: 15)),
+  DemoEvent(4, 0, Duration(hours: 10), Duration(hours: 13)),
+  DemoEvent(4, 1, Duration(hours: 10, minutes: 15), Duration(hours: 13)),
+  DemoEvent(4, 2, Duration(hours: 10, minutes: 30), Duration(hours: 13)),
+  DemoEvent(4, 3, Duration(hours: 10, minutes: 45), Duration(hours: 13)),
+  DemoEvent(4, 4, Duration(hours: 11), Duration(hours: 13)),
+  DemoEvent(
     5,
     0,
     Duration(hours: 10, minutes: 30),
     Duration(hours: 13, minutes: 30),
   ),
-  _DemoEvent(
+  DemoEvent(
     5,
     1,
     Duration(hours: 10, minutes: 30),
     Duration(hours: 13, minutes: 30),
   ),
-  _DemoEvent(
+  DemoEvent(
     5,
     2,
     Duration(hours: 10, minutes: 30),
     Duration(hours: 12, minutes: 30),
   ),
-  _DemoEvent(5, 3, Duration(hours: 8, minutes: 30), Duration(hours: 18)),
-  _DemoEvent(5, 4, Duration(hours: 15, minutes: 30), Duration(hours: 16)),
-  _DemoEvent(5, 5, Duration(hours: 11), Duration(hours: 12)),
-  _DemoEvent(5, 6, Duration(hours: 1), Duration(hours: 2)),
-  _DemoEvent(
+  DemoEvent(5, 3, Duration(hours: 8, minutes: 30), Duration(hours: 18)),
+  DemoEvent(5, 4, Duration(hours: 15, minutes: 30), Duration(hours: 16)),
+  DemoEvent(5, 5, Duration(hours: 11), Duration(hours: 12)),
+  DemoEvent(5, 6, Duration(hours: 1), Duration(hours: 2)),
+  DemoEvent(
     6,
     0,
     Duration(hours: 9, minutes: 30),
     Duration(hours: 15, minutes: 30),
   ),
-  _DemoEvent(6, 1, Duration(hours: 11), Duration(hours: 13)),
-  _DemoEvent(
+  DemoEvent(6, 1, Duration(hours: 11), Duration(hours: 13)),
+  DemoEvent(
     6,
     2,
     Duration(hours: 9, minutes: 30),
     Duration(hours: 11, minutes: 30),
   ),
-  _DemoEvent(
+  DemoEvent(
     6,
     3,
     Duration(hours: 9, minutes: 30),
     Duration(hours: 10, minutes: 30),
   ),
-  _DemoEvent(6, 4, Duration(hours: 10), Duration(hours: 11)),
-  _DemoEvent(6, 5, Duration(hours: 10), Duration(hours: 11)),
-  _DemoEvent(
+  DemoEvent(6, 4, Duration(hours: 10), Duration(hours: 11)),
+  DemoEvent(6, 5, Duration(hours: 10), Duration(hours: 11)),
+  DemoEvent(
     6,
     6,
     Duration(hours: 9, minutes: 30),
     Duration(hours: 10, minutes: 30),
   ),
-  _DemoEvent(
+  DemoEvent(
     6,
     7,
     Duration(hours: 9, minutes: 30),
     Duration(hours: 10, minutes: 30),
   ),
-  _DemoEvent(
+  DemoEvent(
     6,
     8,
     Duration(hours: 9, minutes: 30),
     Duration(hours: 10, minutes: 30),
   ),
-  _DemoEvent(
+  DemoEvent(
     6,
     9,
     Duration(hours: 10, minutes: 30),
     Duration(hours: 12, minutes: 30),
   ),
-  _DemoEvent(6, 10, Duration(hours: 12), Duration(hours: 13)),
-  _DemoEvent(6, 11, Duration(hours: 12), Duration(hours: 13)),
-  _DemoEvent(6, 12, Duration(hours: 12), Duration(hours: 13)),
-  _DemoEvent(6, 13, Duration(hours: 12), Duration(hours: 13)),
-  _DemoEvent(6, 14, Duration(hours: 6, minutes: 30), Duration(hours: 8)),
-  _DemoEvent(
+  DemoEvent(6, 10, Duration(hours: 12), Duration(hours: 13)),
+  DemoEvent(6, 11, Duration(hours: 12), Duration(hours: 13)),
+  DemoEvent(6, 12, Duration(hours: 12), Duration(hours: 13)),
+  DemoEvent(6, 13, Duration(hours: 12), Duration(hours: 13)),
+  DemoEvent(6, 14, Duration(hours: 6, minutes: 30), Duration(hours: 8)),
+  DemoEvent(
     7,
     0,
     Duration(hours: 2, minutes: 30),
     Duration(hours: 4, minutes: 30),
   ),
-  _DemoEvent(
+  DemoEvent(
     7,
     1,
     Duration(hours: 2, minutes: 30),
     Duration(hours: 3, minutes: 30),
   ),
-  _DemoEvent(7, 2, Duration(hours: 3), Duration(hours: 4)),
-  _DemoEvent(8, 0, Duration(hours: 20), Duration(hours: 4), endDateOffset: 1),
-  _DemoEvent(9, 1, Duration(hours: 12), Duration(hours: 16)),
-  _DemoEvent(9, 2, Duration(hours: 12), Duration(hours: 13)),
-  _DemoEvent(9, 3, Duration(hours: 12), Duration(hours: 13)),
-  _DemoEvent(9, 4, Duration(hours: 12), Duration(hours: 13)),
-  _DemoEvent(9, 5, Duration(hours: 15), Duration(hours: 16)),
-  _DemoEvent.allDay(0, 0, 1),
-  _DemoEvent.allDay(1, 1, 1),
-  _DemoEvent.allDay(2, 0, 2),
-  _DemoEvent.allDay(3, 2, 2),
-  _DemoEvent.allDay(4, 2, 2),
-  _DemoEvent.allDay(5, 1, 2),
-  _DemoEvent.allDay(6, 3, 2),
-  _DemoEvent.allDay(7, 4, 4),
-  _DemoEvent.allDay(8, -1, 2),
-  _DemoEvent.allDay(9, -2, 2),
-  _DemoEvent.allDay(10, -3, 2),
+  DemoEvent(7, 2, Duration(hours: 3), Duration(hours: 4)),
+  DemoEvent(8, 0, Duration(hours: 20), Duration(hours: 4), endDateOffset: 1),
+  DemoEvent(9, 1, Duration(hours: 12), Duration(hours: 16)),
+  DemoEvent(9, 2, Duration(hours: 12), Duration(hours: 13)),
+  DemoEvent(9, 3, Duration(hours: 12), Duration(hours: 13)),
+  DemoEvent(9, 4, Duration(hours: 12), Duration(hours: 13)),
+  DemoEvent(9, 5, Duration(hours: 15), Duration(hours: 16)),
+  DemoEvent.allDay(0, 0, 1),
+  DemoEvent.allDay(1, 1, 1),
+  DemoEvent.allDay(2, 0, 2),
+  DemoEvent.allDay(3, 2, 2),
+  DemoEvent.allDay(4, 2, 2),
+  DemoEvent.allDay(5, 1, 2),
+  DemoEvent.allDay(6, 3, 2),
+  DemoEvent.allDay(7, 4, 4),
+  DemoEvent.allDay(8, -1, 2),
+  DemoEvent.allDay(9, -2, 2),
+  DemoEvent.allDay(10, -3, 2),
 ];
 
-class _DemoEvent extends BasicEvent {
-  _DemoEvent(
+class DemoEvent extends BasicEvent {
+  DemoEvent(
     int demoId,
     int eventId,
     Duration start,
@@ -187,7 +187,7 @@ class _DemoEvent extends BasicEvent {
               end,
         );
 
-  _DemoEvent.allDay(int id, int startOffset, int length)
+  DemoEvent.allDay(int id, int startOffset, int length)
       : super(
           id: 'a-$id',
           title: 'a-$id',

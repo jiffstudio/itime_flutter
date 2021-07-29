@@ -8,9 +8,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:itime_frontend/generated/l10n.dart';
+import 'package:itime_frontend/models/index.dart';
 import 'package:itime_frontend/res.dart';
 import 'package:itime_frontend/styles/itime_colors.dart';
 import 'package:itime_frontend/views/widgets/button.dart';
+import 'package:itime_frontend/views/widgets/positioning_demo.dart';
 import 'package:itime_frontend/views/widgets/text_field.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:quiver/iterables.dart';
@@ -33,8 +35,19 @@ import 'widgets/rounded_container.dart';
 import 'widgets/timetable.dart';
 
 class TimetablePage extends StatefulWidget {
+  LoginResult result;
+
+  TimetablePage(this.result);
+
   @override
   _TimetablePageState createState() => _TimetablePageState();
+}
+
+extension StringToDuration on String {
+  Duration toDuration() {
+    DateTime dateTime = DateTime.parse(this);
+    return Duration(hours: dateTime.hour, minutes: dateTime.minute);
+  }
 }
 
 class _TimetablePageState extends State<TimetablePage>
@@ -105,6 +118,16 @@ class _TimetablePageState extends State<TimetablePage>
             ),
           ],
           title: _buildTitle(),
+          positioningEvents: widget.result.arr
+              .map((table) => table.events
+                  .map((event) => event.time.map((time) => DemoEvent(
+                      time.eventId,
+                      time.eventTimeId,
+                      time.startTime.toDuration(),
+                      time.endTime.toDuration())))
+                  .reduce((value, element) => value.toList()..addAll(element)))
+              .reduce((value, element) => value.toList()..addAll(element))
+              .toList(),
         );
       },
     );
