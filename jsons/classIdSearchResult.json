@@ -1,8 +1,0 @@
-{
-    "tableName": "班级课表",
-    "type": "班级课表",
-    "tableId": "4",
-    "events":"$[]classEventsResult",
-    "permission": "$[]classPermission",
-    "classId": "1911105"
-}

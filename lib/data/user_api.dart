@@ -1,42 +1,39 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:itime_frontend/models/loginResultResponse.dart';
-
 import '../logger.dart';
-import '../model/canteen.dart';
-import '../utils/date_utils.dart';
+import '../models/login_model.dart';
 import '../utils/json_util.dart';
 import 'base_api.dart';
 
 class UserApi extends BaseApi {
   static final UserApi _instance = UserApi._();
 
-  UserApi._()
-      : super(
-          baseUrl: 'http://116.63.196.15:8001/v1/user',
-          cacheDbName: 'login_cache',
-          defaultMaxAge: Duration(days: 1),
-          defaultMaxStale: Duration(days: 7),
-        );
+  UserApi._() : super();
 
   factory UserApi() {
     return _instance;
   }
 
-  Future<LoginResultResponse?> login({
+  Future<LoginModel> login({
     required String studentId,
     required String pwd,
   }) async {
-    final url = '/login?studentId=$studentId&pwd=$pwd';
+    final url = '/user/login';
     try {
-      final response = await dio.post(url);
-      final json = await parseJsonInBackground(utf8.decode(response.data));
-      print(json);
-      return LoginResultResponse.fromJson(json);
-    } on Exception catch (_) {
-      logger.e('Error getting LoginResultResponse from UserApi.\n$url');
-      throw Exception('Error getting LoginResultResponse from UserApi.\n$url');
+      final response = await dio.post(url, data: {
+        "studentId": studentId,
+        "pwd": pwd,
+      });
+      LoginModel loginModel = LoginModel.fromJson(response.data);
+      dio.addAuthorization(
+          jwt: loginModel.data.accessToken,
+          refreshToken: loginModel.data.refreshToken);
+      return loginModel;
+    } on Exception catch (e) {
+      logger.e(
+          'Error getting LoginResultResponse from UserApi.\n${e.toString()}\n$url');
+      throw Exception(
+          'Error getting LoginResultResponse from UserApi.\n$url\n$e');
     }
   }
 }

@@ -21,7 +21,7 @@ extension DateTimeExtension on DateTime {
   }
 
   DateTime _weekYearStartDate(int year) {
-    final firstDayOfYear = DateTime.utc(year, 1, 1);
+    final firstDayOfYear = DateTime(year, 1, 1);
     final dayOfWeek = firstDayOfYear.weekday;
 
     return firstDayOfYear.add(
@@ -45,7 +45,7 @@ extension DateTimeExtension on DateTime {
 
   DateTime weekStart() {
     // This is ugly, but to avoid problems with daylight saving
-    var monday = DateTime.utc(year, month, day);
+    var monday = DateTime(year, month, day);
     if (monday.weekday != DateTime.monday) {
       monday = monday.subtract(Duration(days: monday.weekday - 1));
     }
@@ -55,7 +55,7 @@ extension DateTimeExtension on DateTime {
   DateTime weekEnd() {
     // This is ugly, but to avoid problems with daylight saving
     // Set the last microsecond to really be the end of the week
-    var sunday = DateTime.utc(year, month, day, 23, 59, 59, 999, 999999);
+    var sunday = DateTime(year, month, day, 23, 59, 59, 999, 999999);
     sunday = sunday.add(Duration(days: 7 - sunday.weekday));
     return sunday;
   }
@@ -68,4 +68,11 @@ extension DateTimeExtension on DateTime {
   DateTime withoutTime() => DateTime(year, month, day);
 
   bool isToday() => isOnSameDayWith(DateTime.now());
+}
+extension StringToDuration on String {
+  Duration toDuration() {
+    var hour = int.parse(this.split(":")[0]);
+    var minute = int.parse(this.split(":")[1]);
+    return Duration(hours: hour, minutes: minute);
+  }
 }

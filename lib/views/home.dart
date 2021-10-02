@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:itime_frontend/generated/l10n.dart';
 
-import 'timetable_page.dart';
-import 'map.dart';
-import 'settings.dart';
+import '../pages/timetable_page.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override

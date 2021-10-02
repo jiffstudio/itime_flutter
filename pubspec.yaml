@@ -1,5 +1,5 @@
 name: itime_frontend
-description: ʱ�̣���ʱ�������??????����
+description: 时锟教ｏ拷锟斤拷时锟斤拷锟斤拷锟斤拷锟???????锟斤拷锟斤拷
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -29,7 +29,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: any
-  flutter_bloc: any
+  bloc: any
+  flutter_bloc: ^7.0.0
   bubble_bottom_bar: any
   material_design_icons_flutter: any
   fluttertoast: any
@@ -48,10 +49,19 @@ dependencies:
   bubble_tab_indicator: any
   tab_indicator_styler: any
   quiver: any
-  time_machine: any
+  time_machine: ^0.9.16
   timetable:
     path: ./plugins/timetable
-  json_to_model: any
+  json_to_model:
+    path: ./plugins/json_to_model
+  hydrated_bloc: any
+  path_provider: ^2.0.2
+  rest_api_client:
+    path: ./plugins/rest_api_client
+  clock: any
+  flutter_secure_storage: ^4.2.1
+  popup_menu: any
+  qr_flutter: any
 
 dev_dependencies:
   flutter_test:
@@ -92,8 +102,10 @@ flutter:
     - assets/logo.png
     - assets/sleep.png
     - images/arrow_drop_down.png
+    - images/arrow_drop_right_down.png
     - images/calendar.png
     - images/check.png
+    - images/cover.png
     - images/cross.png
     - images/edit.png
     - images/plus.png
@@ -101,26 +113,11 @@ flutter:
     - images/scan.png
     - images/search.png
     - images/share.png
+    - images/splash.jpeg
     - images/trash.png
     - images/x.png
     - packages/time_machine/data/cultures/cultures.bin
     - packages/time_machine/data/tzdb/tzdb.bin
-
-    - images/splash.jpeg
-    - images/2.0x/splash.jpeg
-    - images/3.0x/splash.jpeg
-
-    - images/cover.png
-    - images/2.0x/cover.png
-    - images/3.0x/cover.png
-
-    - images/plus.png
-    - images/2.0x/plus.png
-    - images/3.0x/plus.png
-
-    - images/arrow_drop_right_down.png
-    - images/2.0x/arrow_drop_right_down.png
-    - images/3.0x/arrow_drop_right_down.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -1,0 +1,8 @@
+{
+  "tableName": "孙黎子的个人课表",
+  "type": "个人课表",
+  "tableId": "adb92f2dbfdc8dcc46c5ed0f8d2a112a",
+  "events": "$[]event_model",
+  "permission": "$[]permission_model",
+  "ownerId": "ce4d9fbccf9481de95a8b4e89455b5cc"
+}

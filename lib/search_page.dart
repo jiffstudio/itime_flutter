@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'views/widgets/self_Card.dart';
+import 'views/widgets/custom_card.dart';
 
 class SearchPage extends StatefulWidget {
   SearchPage({Key? key}) : super(key: key);
@@ -140,10 +140,11 @@ class SearchBarDelegate extends SearchDelegate<String> {
           child: ListView.builder(
             itemCount: suggestionList.length,
             itemBuilder: (context, index) {
-              return ButtonCard(
-                firstText: suggestionList[index],
-                secondText: '李文学 | 2-18周 周一 周三 周五 第1大节',
-              );
+              // return ButtonCard(
+              //   firstText: suggestionList[index],
+              //   secondText: '李文学 | 2-18周 周一 周三 周五 第1大节',
+              // );
+              return Container();
             },
           ),
         ))

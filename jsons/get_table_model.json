@@ -1,0 +1,8 @@
+{
+  "code": 0,
+  "msg": "成功",
+  "data": {
+    "tableName?": "",
+    "events": "$[]event_model"
+  }
+}

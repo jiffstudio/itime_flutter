@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:black_hole_flutter/black_hole_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:itime_frontend/views/widgets/term.dart';
 import 'package:supercharged/supercharged.dart' hide DateTimeSC;
 import 'package:timetable/timetable.dart';
 import 'package:timetable/src/utils.dart';
@@ -181,8 +182,8 @@ class DemoEvent extends BasicEvent {
           id: '$demoId-$eventId',
           title: '$demoId-$eventId',
           backgroundColor: _getColor('$demoId-$eventId'),
-          start: DateTime.now().toUtc().atStartOfDay + demoId.days + start,
-          end: DateTime.now().toUtc().atStartOfDay +
+          start: DateTime.now().atStartOfDay + demoId.days + start,
+          end: DateTime.now().atStartOfDay +
               (demoId + endDateOffset).days +
               end,
         );
@@ -192,10 +193,72 @@ class DemoEvent extends BasicEvent {
           id: 'a-$id',
           title: 'a-$id',
           backgroundColor: _getColor('a-$id'),
-          start: DateTime.now().toUtc().atStartOfDay + startOffset.days,
+          start: DateTime.now().atStartOfDay + startOffset.days,
           end:
-              DateTime.now().toUtc().atStartOfDay + (startOffset + length).days,
+              DateTime.now().atStartOfDay + (startOffset + length).days,
         );
+
+  static Color _getColor(String id) {
+    return Random(id.hashCode)
+        .nextColorHsv(saturation: 0.6, value: 0.8, alpha: 1)
+        .toColor();
+  }
+}
+extension IntSCMore on int {
+  Duration get weeks {
+    return Duration(days: this * 7);
+  }
+}
+class LessonEvent extends BasicEvent {
+  String timetableId;
+  int week;
+  int day;
+  int eventId;
+  int timeId;
+  String title;
+  Duration? startTime;
+  Duration? endTime;
+  Term term;
+  LessonEvent({
+    required this.timetableId,
+    required this.week,
+    required this.day,
+    required this.eventId,
+    required this.timeId,
+    required this.title,
+    this.startTime,
+    required this.endTime,
+    required this.term,
+  }) : super(
+    id: '$timeId',
+    title: title,
+    backgroundColor: _getColor('$eventId'),
+    start: term.startDate + (week - 1).weeks + (day - 1).days + startTime!,
+    end: term.startDate + (week - 1).weeks + (day - 1).days + endTime!,
+  ){
+    print("term start end");
+    print(term);
+    print(start);
+    print(end);
+  }
+
+  LessonEvent.allDay(int id, int startOffset, int length, {
+    required this.timetableId,
+    required this.week,
+    required this.day,
+    required this.eventId,
+    required this.timeId,
+    required this.title,
+    required this.term,
+  })
+      : super(
+    id: 'a-$id',
+    title: 'a-$id',
+    backgroundColor: _getColor('a-$id'),
+    start: DateTime.now().atStartOfDay + startOffset.days,
+    end:
+    DateTime.now().atStartOfDay + (startOffset + length).days,
+  );
 
   static Color _getColor(String id) {
     return Random(id.hashCode)
@@ -222,3 +285,4 @@ List<TimeOverlay> positioningDemoOverlayProvider(
     return [TimeOverlay(start: 0.hours, end: 24.hours, widget: widget)];
   }
 }
+

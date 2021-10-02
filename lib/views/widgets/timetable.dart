@@ -1,90 +1,25 @@
-import 'dart:math';
-
+import 'package:black_hole_flutter/black_hole_flutter.dart';
+import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:itime_frontend/styles/itime_colors.dart';
 import 'package:itime_frontend/theme.dart';
 import 'package:itime_frontend/views/widgets/positioning_demo.dart';
-import 'package:itime_frontend/views/widgets/text_field.dart';
+import 'package:itime_frontend/views/widgets/tab_view.dart';
+import 'package:itime_frontend/views/widgets/term.dart';
+import 'package:itime_frontend/views/widgets/term_week.dart';
 import 'package:quiver/iterables.dart';
-import 'package:tab_indicator_styler/tab_indicator_styler.dart';
-import 'package:timetable/timetable.dart';
-
-import '../../model/splan/timetable_entry.dart';
-import '../../res.dart';
-import '../timetable/timetable_empty.dart';
-import 'rounded_container.dart';
-import 'timetable_entry_list_tile.dart';
-
-import 'package:black_hole_flutter/black_hole_flutter.dart';
-import 'package:collection/collection.dart';
-import 'package:flutter/services.dart';
 import 'package:supercharged/supercharged.dart';
-
-// class TimetableWidget extends StatelessWidget {
-//   final DateTime selectedDate;
-//   final List<TimetableEntry>? timetableEntries;
-//
-//   const TimetableWidget({
-//     Key? key,
-//     required this.selectedDate,
-//     @required this.timetableEntries,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     if (timetableEntries == null) {
-//       return RoundedContainer(
-//         margin: EdgeInsets.symmetric(horizontal: 20),
-//         child: Center(
-//           child: CircularProgressIndicator(),
-//         ),
-//       );
-//     }
-//     if (timetableEntries!.isEmpty) {
-//       return TimetableNoLectures();
-//     }
-//
-//     var combinedEntries = <List<TimetableEntry>>[];
-//     var currentEntries = <TimetableEntry>[];
-//
-//     var lastTime;
-//     for (final entry in timetableEntries!) {
-//       if (entry.startTime == null || lastTime != entry.startTime) {
-//         if (lastTime != null) {
-//           combinedEntries.add(currentEntries);
-//           currentEntries = <TimetableEntry>[];
-//         }
-//         lastTime = entry.startTime;
-//       }
-//
-//       currentEntries.add(entry);
-//     }
-//
-//     if (currentEntries != null && !currentEntries.isEmpty) {
-//       combinedEntries.add(currentEntries);
-//     }
-//
-//     return ListView.separated(
-//       shrinkWrap: true,
-//       physics: NeverScrollableScrollPhysics(),
-//       padding: const EdgeInsets.symmetric(horizontal: 20),
-//       itemCount: max(combinedEntries.length, 1),
-//       itemBuilder: (context, index) {
-//         return TimetableEntryListTile(
-//           selectedDate: selectedDate,
-//           entries: combinedEntries[index],
-//         );
-//       },
-//       separatorBuilder: (context, index) => SizedBox(height: 12),
-//     );
-//   }
-// }
+import 'package:timetable/src/utils/listenable.dart';
+import 'package:timetable/timetable.dart';
 
 class TimetableScaffold extends StatefulWidget {
   Widget? title;
   List<Widget>? actions;
   List<BasicEvent> positioningEvents;
-  TimetableScaffold({this.title, this.actions, required this.positioningEvents});
+
+  TimetableScaffold(
+      {this.title, this.actions, required this.positioningEvents});
 
   @override
   _TimetableScaffoldState createState() => _TimetableScaffoldState();
@@ -106,7 +41,7 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
 
   late final _dateController = DateController(
     // All parameters are optional.
-    // initialDate: DateTimeTimetable.today(),
+    initialDate: DateTimeTimetable.today(),
     visibleRange: _visibleDateRange.visibleDateRange,
   );
 
@@ -118,14 +53,11 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
 
   final _draggedEvents = <BasicEvent>[];
 
-  late TabController _tabController;
   late Iterable<num> _weekNumbers;
-  int _selectedWeekIndex = 0;
 
   @override
   void initState() {
     _weekNumbers = range(1, 11);
-    _tabController = TabController(vsync: this, length: _weekNumbers.length);
     super.initState();
   }
 
@@ -138,9 +70,99 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
+    return TimetableConfig<BasicEvent>(
+      // Required:
+      dateController: _dateController,
+      timeController: _timeController,
+      eventBuilder: (context, event) => _buildPartDayEvent(event),
+      child: _buildScaffold(),
+      // Optional:
+      eventProvider: eventProviderFromFixedList(widget.positioningEvents),
+      allDayEventBuilder: (context, event, info) => BasicAllDayEventWidget(
+        event,
+        info: info,
+        onTap: () => _showSnackBar('All-day event $event tapped'),
+      ),
+      timeOverlayProvider: mergeTimeOverlayProviders([
+        positioningDemoOverlayProvider,
+        (context, date) => _draggedEvents
+            .map((it) =>
+                it.toTimeOverlay(date: date, widget: BasicEventWidget(it)))
+            .whereNotNull()
+            .toList(),
+      ]),
+      callbacks: TimetableCallbacks(
+        onWeekTap: (week) {
+          _showSnackBar('Tapped on week $week.');
+          _updateVisibleDateRange(PredefinedVisibleDateRange.week);
+          _dateController.animateTo(
+            week.getDayOfWeek(DateTime.monday),
+            vsync: this,
+          );
+        },
+        onDateTap: (date) {
+          _showSnackBar('Tapped on date $date.');
+          _dateController.animateTo(date, vsync: this);
+        },
+        onDateBackgroundTap: (date) =>
+            _showSnackBar('Tapped on date background at $date.'),
+        onDateTimeBackgroundTap: (dateTime) =>
+            _showSnackBar('Tapped on date-time background at $dateTime.'),
+      ),
+      theme: TimetableThemeData(
+        context,
+        dateIndicatorStyleProvider: (date) {
+          final today = DateTimeTimetable.today();
+          final isToday = date == today;
+
+          return DateIndicatorStyle(context, date,
+              decoration: BoxDecoration(),
+              textStyle: isToday
+                  ? textTheme.tinyBold!.copyWith(
+                      color: ItimeColors.vi,
+                    )
+                  : textTheme.tiny!,
+              padding: EdgeInsets.all(3));
+        },
+        weekdayIndicatorStyleProvider: (date) {
+          final today = DateTimeTimetable.today();
+          final isToday = date == today;
+          return WeekdayIndicatorStyle(context, date,
+              textStyle: isToday
+                  ? textTheme.normalSmallHeavy!.copyWith(
+                      color: ItimeColors.vi,
+                    )
+                  : textTheme.normalSmallBold);
+        },
+        dateHeaderStyleProvider: (date) {
+          return DateHeaderStyle(
+            context,
+            date,
+            indicatorSpacing: 0,
+          );
+        },
+        weekIndicatorStyleProvider: (week) {
+          // TODO: 修改成正常的时间
+          print(Term.byWeek(week));
+          return WeekIndicatorStyle(context, week);
+        },
+        // startOfWeek: DateTime.tuesday,
+        // dateDividersStyle: DateDividersStyle(
+        //   context,
+        //   color: Colors.blue.withOpacity(.3),
+        //   width: 2,
+        // ),
+        // nowIndicatorStyle: NowIndicatorStyle(
+        //   context,
+        //   lineColor: Colors.green,
+        //   shape: TriangleNowIndicatorShape(color: Colors.green),
+        // ),
+        timeIndicatorStyleProvider: (time) => TimeIndicatorStyle(
+          context,
+          time,
+          alwaysUse24HourFormat: true,
+        ),
+      ),
     );
   }
 
@@ -245,53 +267,47 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
       preferredSize: Size.fromHeight(36),
       child: Material(
         color: ItimeColors.card,
-        child: TabBar(
-          onTap: (int i) {
-            // TODO: 改成正常的日期
-            var week = Week(2020, i + 21);
-            _dateController.animateTo(
-              week.getDayOfWeek(DateTime.monday),
-              vsync: this,
-            );
-            setState(() {
-              _selectedWeekIndex = i;
-            });
-
-          },
-          physics: const BouncingScrollPhysics(),
-          labelPadding: EdgeInsets.all(0),
-          controller: _tabController,
-          unselectedLabelColor: ItimeColors.normal,
-          indicatorColor: Colors.green,
-          indicatorSize: TabBarIndicatorSize.label,
-          indicatorWeight: double.minPositive,
-          indicator: RectangularIndicator(
-            topLeftRadius: 12,
-            topRightRadius: 12,
-            bottomLeftRadius: 12,
-            bottomRightRadius: 12,
-            color: ItimeColors.vi,
+        child: ValueListenableBuilder<TermWeek>(
+          valueListenable: _dateController.map((it) =>
+              DateTimeTimetable.dateFromPage(
+                      (it.page + it.visibleDayCount / 2).floor())
+                  .termWeek),
+          builder: (context, termWeek, _) => TabView(
+            initPosition: DateTime.now().termWeek.weekOfTerm - 1,
+            position: termWeek.weekOfTerm - 1,
+            itemCount: termWeek.weekBasedTerm.weeks,
+            onTap: (index) {
+              int weekOfTerm = termWeek.weekBasedTerm.weeksOfTerm[index];
+              var week = Term.byDate(DateTime.now()).obtainWeek(weekOfTerm);
+              _dateController.animateTo(
+                week.getDayOfWeek(DateTime.monday),
+                vsync: this,
+              );
+            },
+            tabBuilder: (context, index) {
+              int weekOfTerm = termWeek.weekBasedTerm.weeksOfTerm[index];
+              return _buildWeekTab(weekOfTerm,
+                  selected: weekOfTerm == termWeek.weekOfTerm);
+            },
           ),
-          isScrollable: true,
-          tabs: _weekNumbers
-              .map((i) =>
-                  _buildWeekTab("第$i周", selected: i - 1 == _selectedWeekIndex))
-              .toList(),
         ),
       ),
     );
   }
 
-  Widget _buildWeekTab(String title, {bool selected = false}) {
+  Widget _buildWeekTab(int weekOfTerm, {bool selected = false}) {
     return SizedBox(
         height: 36,
         child: Tab(
             child: Padding(
                 padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                child: Text(
-                  title,
-                  style: textTheme.bodyText1!
+                child: AnimatedDefaultTextStyle(
+                  duration: Duration(milliseconds: 200),
+                  style: textTheme.normalBold!
                       .copyWith(color: selected ? ItimeColors.white : null),
+                  child: Text(
+                    "第$weekOfTerm周",
+                  ),
                 ))));
   }
 
@@ -299,103 +315,14 @@ class _TimetableScaffoldState extends State<TimetableScaffold>
       context.scaffoldMessenger.showSnackBar(SnackBar(content: Text(content)));
 
   Widget _buildBody() {
-    return TimetableConfig<BasicEvent>(
-      // Required:
-      dateController: _dateController,
-      timeController: _timeController,
-      eventBuilder: (context, event) => _buildPartDayEvent(event),
-      child: MultiDateTimetable<BasicEvent>(),
-      // Optional:
-      eventProvider: eventProviderFromFixedList(widget.positioningEvents),
-      allDayEventBuilder: (context, event, info) => BasicAllDayEventWidget(
-        event,
-        info: info,
-        onTap: () => _showSnackBar('All-day event $event tapped'),
-      ),
-      timeOverlayProvider: mergeTimeOverlayProviders([
-        positioningDemoOverlayProvider,
-        (context, date) => _draggedEvents
-            .map((it) =>
-                it.toTimeOverlay(date: date, widget: BasicEventWidget(it)))
-            .whereNotNull()
-            .toList(),
-      ]),
-      callbacks: TimetableCallbacks(
-        onWeekTap: (week) {
-          _showSnackBar('Tapped on week $week.');
-          _updateVisibleDateRange(PredefinedVisibleDateRange.week);
-          _dateController.animateTo(
-            week.getDayOfWeek(DateTime.monday),
-            vsync: this,
-          );
-        },
-        onDateTap: (date) {
-          _showSnackBar('Tapped on date $date.');
-          _dateController.animateTo(date, vsync: this);
-        },
-        onDateBackgroundTap: (date) =>
-            _showSnackBar('Tapped on date background at $date.'),
-        onDateTimeBackgroundTap: (dateTime) =>
-            _showSnackBar('Tapped on date-time background at $dateTime.'),
-      ),
-      theme: TimetableThemeData(
-        context,
-        dateIndicatorStyleProvider: (date) {
-          final today = DateTimeTimetable.today();
-          final isToday = date == today;
-          final baseTextStyle =
-              textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w500);
+    return MultiDateTimetable<BasicEvent>();
+  }
 
-          return DateIndicatorStyle(context, date,
-              decoration: BoxDecoration(),
-              textStyle: isToday
-                  ? baseTextStyle.copyWith(
-                      color: ItimeColors.vi,
-                    )
-                  : baseTextStyle);
-        },
-        weekdayIndicatorStyleProvider: (date) {
-          final today = DateTimeTimetable.today();
-          final isToday = date == today;
-          final baseTextStyle =
-              textTheme.bodyText2!.copyWith(fontWeight: FontWeight.w500);
-          return WeekdayIndicatorStyle(context, date,
-              textStyle: isToday
-                  ? baseTextStyle.copyWith(
-                      color: ItimeColors.vi,
-                      fontWeight: FontWeight.w700,
-                    )
-                  : baseTextStyle);
-        },
-        dateHeaderStyleProvider: (date) {
-          return DateHeaderStyle(
-            context,
-            date,
-            indicatorSpacing: 0,
-          );
-        },
-        weekIndicatorStyleProvider: (week) {
-          // TODO: 修改成正常的时间
-          return WeekIndicatorStyle(
-              context, Week(week.weekBasedYear, week.weekOfYear - 20));
-        },
-        // startOfWeek: DateTime.monday,
-        // dateDividersStyle: DateDividersStyle(
-        //   context,
-        //   color: Colors.blue.withOpacity(.3),
-        //   width: 2,
-        // ),
-        // nowIndicatorStyle: NowIndicatorStyle(
-        //   context,
-        //   lineColor: Colors.green,
-        //   shape: TriangleNowIndicatorShape(color: Colors.green),
-        // ),
-        timeIndicatorStyleProvider: (time) => TimeIndicatorStyle(
-          context,
-          time,
-          alwaysUse24HourFormat: true,
-        ),
-      ),
+  Widget _buildScaffold() {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: _buildAppBar(),
+      body: _buildBody(),
     );
   }
 }
@@ -434,5 +361,43 @@ extension on PredefinedVisibleDateRange {
       case PredefinedVisibleDateRange.fixed:
         return '7 Days (fixed)';
     }
+  }
+}
+
+extension WeekX on Week {
+  static Week forSemester(DateTime date, DateTime base) {
+    assert(date.isValidTimetableDate);
+
+    final year = base.year;
+    final weekOfYear = (date.dayOfYear - base.dayOfYear) ~/ 7 + 1;
+
+    return Week(year, weekOfYear);
+  }
+
+  Week rebase(DateTime base) {
+    final year = base.year;
+    final newWeekOfYear = weekOfYear - base.week.weekOfYear + 1;
+    assert(newWeekOfYear >= 1);
+    return Week(year, newWeekOfYear);
+  }
+
+  Week nextOrSame(int nextWeeks) {
+    return Week(weekBasedYear, weekOfYear + nextWeeks);
+  }
+
+  Duration difference(Week other) {
+    return getDayOfWeek(1).difference(other.getDayOfWeek(1));
+  }
+}
+
+extension WeekDuration on Duration {
+  int get inWeeks => inDays ~/ 7;
+}
+
+extension TermDate on DateTime {
+  TermWeek get termWeek {
+    Term weekBasedTerm = Term.byDate(this);
+    int weekOfTerm = this.week.difference(weekBasedTerm).inWeeks + 1;
+    return TermWeek(weekBasedTerm, weekOfTerm);
   }
 }

@@ -1,19 +1,12 @@
-export 'classEventResult.dart';
-export 'classIdSearchResult.dart';
-export 'classPermission.dart';
-export 'classTimeResult.dart';
-export 'courseNameSearchResult.dart';
-export 'courseTimeResult.dart';
-export 'eventsResult.dart';
-export 'locationSearchResult.dart';
-export 'locationTimeResult.dart';
-export 'loginResult.dart';
-export 'loginResultResponse.dart';
-export 'permissionResult.dart';
-export 'searchResult.dart';
-export 'searchResultResponse.dart';
-export 'tableResult.dart';
-export 'teacherNameSearchResult.dart';
-export 'teacherTimeResult.dart';
-export 'timeResult.dart';
-export 'userInfo.dart';
+import 'package:quiver/core.dart';
+
+T? checkOptional<T>(Optional<T?>? optional, T? def) {
+  // No value given, just take default value
+  if (optional == null) return def;
+
+  // We have an input value
+  if (optional.isPresent) return optional.value;
+
+  // We have a null inside the optional
+  return null;
+}

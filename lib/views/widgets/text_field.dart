@@ -2,46 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:itime_frontend/styles/itime_colors.dart';
 import 'package:itime_frontend/theme.dart';
 
-// class LineTextField extends StatefulWidget {
-//   LineTextField({Key key}) : super(key: key);
-
-//   @override
-//   _LineTextFieldState createState() => _LineTextFieldState();
-// }
-
-// class _LineTextFieldState extends State<LineTextField> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextField(
-//       decoration: InputDecoration(
-//         border: OutlineInputBorder(
-//             borderRadius: BorderRadius.all(Radius.circular(16))),
-//       ),
-//     );
-//   }
-// }
-
-// ignore: must_be_immutable
-// class AreaTextField extends StatefulWidget {
-//   final int maxline;
-//   AreaTextField({Key key,this.maxline}) : super(key: key);
-
-//   @override
-//   _AreaTextFieldState createState() => _AreaTextFieldState();
-// }
-
-// class _AreaTextFieldState extends State<AreaTextField> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextField(
-//       maxLines: ,
-//       decoration: InputDecoration(
-//         border: OutlineInputBorder(
-//             borderRadius: BorderRadius.all(Radius.circular(16))),
-//       ),
-//     );
-//   }
-// }
 
 // ignore: must_be_immutable
 class AreaTextField extends TextField {
@@ -59,12 +19,14 @@ class AreaTextField extends TextField {
 }
 
 // ignore: must_be_immutable
-class LineTextField extends TextField {
-  LineTextField({Key? key})
+class ItimeTextField extends TextField {
+  ItimeTextField({Key? key, bool? autofocus, TextEditingController? controller})
       : super(
           key: key,
+          controller: controller,
           style: textTheme.bodyText1,
           cursorColor: ItimeColors.vi,
+          autofocus: autofocus ?? true,
           decoration: InputDecoration(
             filled: true,
             fillColor: ItimeColors.card,

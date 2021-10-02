@@ -1,0 +1,19 @@
+{
+  "code": 0,
+  "msg": "成功",
+  "data": {
+    "connectSuccess": true,
+    "pwdRight": true,
+    "id": "ce4d9fbccf9481de95a8b4e89455b5cc",
+    "userInfo": {
+      "name": "孙黎子",
+      "grade": "2019",
+      "classId": "1911104",
+      "major": "软件工程"
+    },
+    "timeNodes": "$[]time_node_model",
+    "accessToken": "eyJUeXBlIjoiSldUIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJ0b2tlbl9raW5kIjoiQUNDRVNTX1RPS0VOIiwicGF5bG9hZCI6ImNlNGQ5ZmJjY2Y5NDgxZGU5NWE4YjRlODk0NTViNWNjIiwiZXhwIjoxNjI4Njg0NDE5fQ.vLdheW2tBfNVRunZH3i0hx2z6TbI6_bZUworsT9xkAQ",
+    "refreshToken": "eyJUeXBlIjoiSldUIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJ0b2tlbl9raW5kIjoiUkVGUkVTSF9UT0tFTiIsInBheWxvYWQiOiJjZTRkOWZiY2NmOTQ4MWRlOTVhOGI0ZTg5NDU1YjVjYyIsImV4cCI6MTYyODc1NzcxN30.fQhkoKWoGEG3vV6HSJIb5p1h7XSLZ6ilRjNj8BL3l_k",
+    "arr": "$[]timetable_model"
+  }
+}

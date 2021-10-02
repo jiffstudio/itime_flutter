@@ -34,22 +34,33 @@ const kTextDarker = Color(0xFF17262A);
 const kTextLight = Color(0xFFEEEEEE);
 const kTextLighter = Color(0xFFFBFBFB);
 
-TextTheme get textTheme {
-  return const TextTheme(
+ItimeTextTheme get textTheme {
+  return const ItimeTextTheme(
     headline1: TextStyle(),
     headline2: TextStyle(),
     headline3: TextStyle(),
     headline4: TextStyle(),
     headline5: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
     headline6: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-
-    bodyText1: TextStyle(fontSize: 16),
-    bodyText2: TextStyle(fontSize: 14),
-    subtitle1: TextStyle(fontSize: 12),
-    caption: TextStyle(fontWeight: FontWeight.w700),
-    button: TextStyle(),
-    subtitle2: TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
-    overline: TextStyle(),
+    paragraph: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+    paragraphBold: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+    subtitle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+    normal: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+    normalSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+    normalSmallBold: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    normalSmallHeavy: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+    normalBold: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+    normalBig: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+    small: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+    smallBold: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+    tiny: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+    tinyBold: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+    // bodyText1: TextStyle(fontSize: 16),
+    // bodyText2: TextStyle(fontSize: 14),
+    // subtitle1: TextStyle(fontSize: 12),
+    // caption: TextStyle(fontWeight: FontWeight.w700),
+    // button: TextStyle(),
+    // subtitle2: TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
   ).apply(
     fontFamily: 'OPPOSans',
     bodyColor: ItimeColors.normal,
@@ -57,7 +68,236 @@ TextTheme get textTheme {
   );
 }
 
+class ItimeTextTheme extends TextTheme {
+  final TextStyle? paragraph;
+  final TextStyle? paragraphBold;
+  final TextStyle? subtitle;
+  final TextStyle? normal;
+  final TextStyle? normalBold;
+  final TextStyle? normalSmall;
+  final TextStyle? normalSmallBold;
+  final TextStyle? normalSmallHeavy;
+  final TextStyle? normalBig;
+  final TextStyle? small;
+  final TextStyle? smallBold;
+  final TextStyle? tiny;
+  final TextStyle? tinyBold;
 
+  const ItimeTextTheme({
+    this.paragraph,
+    this.paragraphBold,
+    this.subtitle,
+    this.normal,
+    this.normalBold,
+    this.normalSmall,
+    this.normalSmallBold,
+    this.normalSmallHeavy,
+    this.normalBig,
+    this.small,
+    this.smallBold,
+    this.tiny,
+    this.tinyBold,
+    TextStyle? headline1,
+    TextStyle? headline2,
+    TextStyle? headline3,
+    TextStyle? headline4,
+    TextStyle? headline5,
+    TextStyle? headline6,
+  }) : super(
+          headline1: headline1,
+          headline2: headline2,
+          headline3: headline3,
+          headline4: headline4,
+          headline5: headline5,
+          headline6: headline6,
+        );
+
+  @override
+  ItimeTextTheme apply({
+    String? fontFamily,
+    double fontSizeFactor = 1.0,
+    double fontSizeDelta = 0.0,
+    Color? displayColor,
+    Color? bodyColor,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+  }) {
+    return ItimeTextTheme(
+      headline1: headline1?.apply(
+        color: displayColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      headline2: headline2?.apply(
+        color: displayColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      headline3: headline3?.apply(
+        color: displayColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      headline4: headline4?.apply(
+        color: displayColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      headline5: headline5?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      headline6: headline6?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      paragraph: paragraph?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      paragraphBold: paragraphBold?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      subtitle: subtitle?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      normal: normal?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      normalBold: normalBold?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      normalSmall: normalSmall?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      normalSmallBold: normalSmallBold?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      normalSmallHeavy: normalSmallHeavy?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      normalBig: normalBig?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      small: small?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      smallBold: smallBold?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      tiny: tiny?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      tinyBold: tinyBold?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+    );
+  }
+}
 
 ThemeData get theme {
   final base = ThemeData(
@@ -96,6 +336,9 @@ ThemeData get theme {
         borderRadius: BorderRadius.circular(8),
       ),
     ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: ItimeColors.white,
+    ),
     scaffoldBackgroundColor: ItimeColors.white,
     primaryIconTheme: base.iconTheme.copyWith(
       color: kIconDark,
@@ -115,6 +358,12 @@ ThemeData get theme {
         fontFamily: 'Rubik',
         color: kTextDark,
       ),
+    ),
+    popupMenuTheme: PopupMenuThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16.0)),
+      ),
+      elevation: 4,
     ),
   );
 }
